@@ -1,4 +1,4 @@
-package com.android.smart.tv.yjgz;
+package com.github.tvbox.osc;
 
 import android.webkit.MimeTypeMap;
 
@@ -21,7 +21,7 @@ public class SAFProvider extends DocumentsProvider {
 
     private static final String ALL_MIME_TYPES = "*/*";
 
-    // --- 修改重点：获取应用的根数据目录 (/data/data/com.android.smart.tv.yjgz) ---
+    // --- 修改重点：获取应用的根数据目录 (/data/data/com.github.tvbox.osc) ---
     private File getBaseDir() {
         // 使用 getApplicationInfo().dataDir 直接指向应用根目录
         return new File(getContext().getApplicationInfo().dataDir);
