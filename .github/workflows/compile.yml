@@ -1,0 +1,44 @@
+name: Remote Compile SAFProvider
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compile Java to Class
+        run: |
+          # 编译 Java 文件，请确保 android.jar 在仓库根目录
+          javac -encoding UTF-8 -classpath android.jar SAFProvider.java
+
+      - name: Convert Class to Dex
+        run: |
+          # 动态查找并运行 d8 工具
+          D8_PATH=$(find $ANDROID_HOME/build-tools -name d8 | head -n 1)
+          $D8_PATH --lib android.jar --output . SAFProvider.class
+
+      - name: Setup Baksmali
+        run: |
+          # 下载官方的可执行版 baksmali (fat jar)
+          # 使用 -L 参数跟随重定向，确保下载成功
+          curl -L https://bitbucket.org/JesusFreke/smali/downloads/baksmali-2.5.2.jar -o baksmali.jar
+
+      - name: Convert Dex to Smali
+        run: |
+          # 使用 disassemble 命令进行反编译
+          java -jar baksmali.jar disassemble classes.dex -o out_smali
+
+      - name: Upload Smali Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: SAFProvider-Smali
+          path: out_smali/
