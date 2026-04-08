@@ -1,4 +1,4 @@
-package com.netease.filmlytv;
+package me.sheimi.sgit;
 
 import android.webkit.MimeTypeMap;
 
@@ -21,7 +21,7 @@ public class SAFProvider extends DocumentsProvider {
 
     private static final String ALL_MIME_TYPES = "*/*";
 
-    // --- 修改重点：获取应用的根数据目录 (/data/data/com.netease.filmlytv) ---
+    // --- 修改重点：获取应用的根数据目录 (/data/data/me.sheimi.sgit) ---
     private File getBaseDir() {
         // 使用 getApplicationInfo().dataDir 直接指向应用根目录
         return new File(getContext().getApplicationInfo().dataDir);
