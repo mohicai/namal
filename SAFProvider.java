@@ -61,10 +61,10 @@ public class SAFProvider extends DocumentsProvider {
         // Root ID 使用根目录路径
         row.add(Root.COLUMN_ROOT_ID, getDocIdForFile(baseDir));
         row.add(Root.COLUMN_DOCUMENT_ID, getDocIdForFile(baseDir));
-        row.add(Root.COLUMN_SUMMARY, "Shizuku Root Storage");
+        row.add(Root.COLUMN_SUMMARY, "ClashMi Root Storage");
         // 确保勾选 SUPPORTS_CREATE，方便 Termux 使用 termux-saf-create
         row.add(Root.COLUMN_FLAGS, Root.FLAG_SUPPORTS_CREATE | Root.FLAG_SUPPORTS_SEARCH | Root.FLAG_SUPPORTS_IS_CHILD);
-        row.add(Root.COLUMN_TITLE, "Shizuku");
+        row.add(Root.COLUMN_TITLE, "ClashMi");
         row.add(Root.COLUMN_MIME_TYPES, ALL_MIME_TYPES);
         row.add(Root.COLUMN_AVAILABLE_BYTES, baseDir.getFreeSpace());
         row.add(Root.COLUMN_ICON, android.R.drawable.ic_menu_save);
